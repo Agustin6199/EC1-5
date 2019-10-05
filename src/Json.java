@@ -5,25 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class LecturaJSON {
+public interface Json {
 
-    public static void main(String[] args) {
-
-        String json = "{\n"
-                + "\"BACK\":[[4,4,4],[3,3,3],[3,3,3]],"
-                + "\"DOWN\":[[1,1,1],[2,4,4],[1,1,1]],"
-                + "\"FRONT\":[[2,2,2],[2,2,2],[5,5,5]],"
-                + "\"LEFT\":[[2,4,4],[0,0,0],[2,4,4]],"
-                + "\"RIGHT\":[[5,5,3],[1,1,1],[5,5,3]],"
-                + "\"UP\":[[0,0,0],[5,5,3],[0,0,0]]"
-                + "}";
-        
-        Cubo cubo = new Cubo(json);
-        
-        cubo.MostrarCara(cubo.getBack());
-    }
-
-    public static void lectorJson(String json1) {
+    public static void lecturaJson(String json1) {
 
         int j = -1, i = 0, n = 0;
 
@@ -124,10 +108,15 @@ public class LecturaJSON {
             }
         }
         
-        
+        Cubo.setBack(back);
+        Cubo.setDown(down);
+        Cubo.setFront(front);
+        Cubo.setLeft(left);
+        Cubo.setRight(right);
+        Cubo.setUp(up);
+
     }
 
-    //Mostrar matriz que pasa por parámetro
     public static void MostrarCara(int[][] back) {
 
         for (int x = 0; x < back.length; x++) {
