@@ -324,7 +324,7 @@ public class Cubo{
     
     private void lecturaJson(String json1) {
 
-        int j = -1, i = 0, n = 0;
+        int i = -1, j = 0, n = 0;
 
         JsonParser parser = new JsonParser();
         JsonObject gsonObj = parser.parse(json1).getAsJsonObject();
@@ -345,81 +345,81 @@ public class Cubo{
         //Recoger y rellenar la cara BACK
         for (JsonElement bacck : Arrback) {
             JsonArray internoBack = bacck.getAsJsonArray();
-            j++;
-            i = 0;
+            i++;
+            j = 0;
             for (JsonElement backu : internoBack) {
                 back[i][j] = backu.getAsInt();
-                i++;
+                j++;
             }
         }
 
         //Recoger y rellenar la cara DOWN
-        i = 0;
-        j = -1;
+        i = -1;
+        j = 0;
         JsonArray Arrdown = gsonObj.get("DOWN").getAsJsonArray();
         for (JsonElement dowwn : Arrdown) {
             JsonArray internoDown = dowwn.getAsJsonArray();
-            j++;
-            i = 0;
+            i++;
+            j = 0;
             for (JsonElement downu : internoDown) {
                 down[i][j] = downu.getAsInt();
-                i++;
+                j++;
             }
         }
 
         //Recoger y rellenar la cara FRONT
-        i = 0;
-        j = -1;
+        i = -1;
+        j = 0;
         JsonArray Arrfront = gsonObj.get("FRONT").getAsJsonArray();
         for (JsonElement fronnt : Arrfront) {
             JsonArray internofront = fronnt.getAsJsonArray();
-            j++;
-            i = 0;
+            i++;
+            j = 0;
             for (JsonElement frontu : internofront) {
                 front[i][j] = frontu.getAsInt();
-                i++;
+                j++;
             }
         }
 
         //Recoger y rellenar la cara LEFT
-        i = 0;
-        j = -1;
+        i = -1;
+        j = 0;
         JsonArray Arrleft = gsonObj.get("LEFT").getAsJsonArray();
         for (JsonElement leftt : Arrleft) {
             JsonArray internoleft = leftt.getAsJsonArray();
-            j++;
-            i = 0;
+            i++;
+            j = 0;
             for (JsonElement leftu : internoleft) {
                 left[i][j] = leftu.getAsInt();
-                i++;
+                j++;
             }
         }
 
         //Recoger y rellenar la cara RIGHT
-        i = 0;
-        j = -1;
+        i = -1;
+        j = 0;
         JsonArray Arrright = gsonObj.get("RIGHT").getAsJsonArray();
         for (JsonElement righht : Arrright) {
             JsonArray internoright = righht.getAsJsonArray();
-            j++;
-            i = 0;
+            i++;
+            j = 0;
             for (JsonElement rightu : internoright) {
                 right[i][j] = rightu.getAsInt();
-                i++;
+                j++;
             }
         }
 
         //Recoger y rellenar la cara UP
-        i = 0;
-        j = -1;
+        i = -1;
+        j = 0;
         JsonArray Arrup = gsonObj.get("UP").getAsJsonArray();
         for (JsonElement upp : Arrup) {
             JsonArray internoup = upp.getAsJsonArray();
-            j++;
-            i = 0;
+            i++;
+            j = 0;
             for (JsonElement upu : internoup) {
                 up[i][j] = upu.getAsInt();
-                i++;
+                j++;
             }
         }
         
@@ -473,7 +473,7 @@ public class Cubo{
     		stringFace += "[";
     		for(int j = 0; j < face.length; j++) {
     			if(j != 0) stringFace += " ";
-    			stringFace += face[j][i];
+    			stringFace += face[i][j];
     			if(j + 1 < face.length) stringFace += ",";
     		}
     		stringFace += "]";

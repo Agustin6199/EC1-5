@@ -18,20 +18,20 @@ public class LecturaJSON {
                 + "\"UP\":[[0,0,0],[5,5,3],[0,0,0]]"
                 + "}";
         
-        //Cubo cuboJSON = new Cubo(json);
+        Cubo cuboJSON = new Cubo(json);
         
-        Cubo cuboResuelto = new Cubo(3);
+       // Cubo cuboResuelto = new Cubo(3);
         
-        //System.out.println(cuboJSON.toString());
-        System.out.println(cuboResuelto.toString());
+        System.out.println(cuboJSON.toString());
+        //System.out.println(cuboResuelto.toString());
        
         //System.out.println(cuboJSON.Get_MD5());
         //System.out.println(cuboResuelto.Get_MD5());
         
-        cuboResuelto.Move("L0");
-        System.out.println(cuboResuelto.toString());
-        cuboResuelto.Move("l0");
-        System.out.println(cuboResuelto.toString());
+        //cuboResuelto.Move("D0");
+        //System.out.println(cuboResuelto.toString());
+        //cuboResuelto.Move("d0");
+        //System.out.println(cuboResuelto.toString());
 
     }
     
