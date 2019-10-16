@@ -1,6 +1,26 @@
-package practicassisinteligentes;
+import java.io.FileReader;
 
 public class Estado {
-    //Un cubo y una EDA almacenando los demás cubos
-    //Dos constructores, uno a partir de un cubo y otro a partir de un json
+	
+	private Cubo c;
+	
+	
+	public Estado(FileReader json) {
+		
+		setC(new Cubo(json));
+		 
+	}
+	
+	public Cubo getC() {
+		return c;
+	}
+
+	public void setC(Cubo c) {
+		this.c = c;
+	}
+	
+	public boolean EsObjetivo() {
+		return getC().isSolved();
+	}
+	
 }

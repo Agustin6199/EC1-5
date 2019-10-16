@@ -543,4 +543,41 @@ public class Cubo{
     	
     	return sb.toString();
     }
+    
+    public boolean isSolved() {
+    	boolean solved = true;
+    	boolean[] colorSeen = new boolean[6];
+    	for(int i = 0; i < 6; i++) colorSeen[i] = false;
+    	
+    	solved = checkSolveFace(this.Back, solved, colorSeen);
+    	solved = checkSolveFace(this.Down, solved, colorSeen);
+    	solved = checkSolveFace(this.Front, solved, colorSeen);
+    	solved = checkSolveFace(this.Left, solved, colorSeen);
+    	solved = checkSolveFace(this.Right, solved, colorSeen);
+    	solved = checkSolveFace(this.Up, solved, colorSeen);
+    	
+    	return solved;
+    }
+    
+    private boolean checkSolveFace(int[][] face, boolean solved, boolean[] colorSeen) {
+    	
+    	boolean ret = solved;
+    	int faceNum = 0;
+    	
+    	for(int i = 0; i < face.length && ret; i++) 
+    		for(int j = 0; j < face.length && ret; j++) 
+    			
+    			if(i == 0 && j == 0) 
+    				if(colorSeen[face[i][j]])
+    					ret = false;
+    				else {
+    					colorSeen[face[i][j]] = true;
+    					faceNum = face[i][j];
+    				}
+    			else
+    				if(face[i][j] != faceNum) ret = false;
+    	
+    	return ret;
+    	
+    }
 }

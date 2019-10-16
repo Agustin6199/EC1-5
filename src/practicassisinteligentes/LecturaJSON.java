@@ -19,13 +19,10 @@ public class LecturaJSON {
         	System.out.println(cuboJSON.toString());
         System.out.println(cuboResuelto.toString());
        
-        System.out.println("///////////////////////////////////////");
-        
-        Cubo cuboClonado = cuboResuelto.clone();
-        cuboClonado.Move("L0");
-        
-        System.out.println(cuboResuelto.toString());
-        System.out.println(cuboClonado.toString());
+        System.out.println("///////////////////TESTING////////////////////\n");
+        System.out.println("El cubo del fichero JSON " + (cuboJSON.isSolved()?"si":"no") + " está resuelto.");
+        System.out.println("El cubo creado mediante el constructor que tiene un entero como parámetro " + (cuboResuelto.isSolved()?"si":"no") + " está resuelto.");
+
 
         //System.out.println(cuboJSON.Get_MD5());
         //System.out.println(cuboResuelto.Get_MD5());
