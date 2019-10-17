@@ -131,19 +131,19 @@ public class Cubo{
 
         for (int i = 0; i < n + 1; i++) {
 
-            vToSave = Up[n - i][n - pos];
-            Up[n - i][n - pos] = Back[i][pos];
+            vToSave = Up[n - pos][n - i];
+            Up[n - pos][n - i] = Back[pos][i];
 
             vToReplace = vToSave;
-            vToSave = Front[i][pos];
-            Front[i][pos] = vToReplace;
+            vToSave = Front[pos][i];
+            Front[pos][i] = vToReplace;
 
             vToReplace = vToSave;
-            vToSave = Down[i][pos];
-            Down[i][pos] = vToReplace;
+            vToSave = Down[pos][i];
+            Down[pos][i] = vToReplace;
 
             vToReplace = vToSave;
-            Back[i][pos] = vToReplace;
+            Back[pos][i] = vToReplace;
 
         }
 
@@ -162,19 +162,19 @@ public class Cubo{
 
         for (int i = 0; i < n + 1; i++) {
 
-            vToSave = Right[n - i][pos];
-            Right[n - i][pos] = Back[n - pos][n - i];
+            vToSave = Right[pos][n - i];
+            Right[pos][n - i] = Back[n - i][n - pos];
 
             vToReplace = vToSave;
-            vToSave = Front[pos][i];
-            Front[pos][i] = vToReplace;
+            vToSave = Front[i][pos];
+            Front[i][pos] = vToReplace;
 
             vToReplace = vToSave;
-            vToSave = Left[i][n - pos];
-            Left[i][n - pos] = vToReplace;
+            vToSave = Left[n - pos][i];
+            Left[n - pos][i] = vToReplace;
 
             vToReplace = vToSave;
-            Back[n - pos][n - i] = vToReplace;
+            Back[n - i][n - pos] = vToReplace;
 
         }
 
@@ -193,19 +193,19 @@ public class Cubo{
 
         for (int i = 0; i < n + 1; i++) {
 
-            vToSave = Right[pos][i];
-            Right[pos][i] = Down[pos][i];
+            vToSave = Right[i][pos];
+            Right[i][pos] = Down[i][pos];
 
             vToReplace = vToSave;
-            vToSave = Up[pos][i];
-            Up[pos][i] = vToReplace;
+            vToSave = Up[i][pos];
+            Up[i][pos] = vToReplace;
 
             vToReplace = vToSave;
-            vToSave = Left[pos][i];
-            Left[pos][i] = vToReplace;
+            vToSave = Left[i][pos];
+            Left[i][pos] = vToReplace;
 
             vToReplace = vToSave;
-            Down[pos][i] = vToReplace;
+            Down[i][pos] = vToReplace;
 
         }
 
@@ -217,26 +217,26 @@ public class Cubo{
 
     }
 
-    private void Move_l(int pos) {
+    private void Move_l(int pos) { 
 
         int n = Back.length - 1;
         int vToSave, vToReplace = 0;
 
         for (int i = 0; i < n + 1; i++) {
 
-            vToSave = Up[n - i][n - pos];
-            Up[n - i][n - pos] = Front[i][pos];
+            vToSave = Up[n - pos][n - i];
+            Up[n - pos][n - i] = Front[pos][i];
 
             vToReplace = vToSave;
-            vToSave = Back[i][pos];
-            Back[i][pos] = vToReplace;
+            vToSave = Back[pos][i];
+            Back[pos][i] = vToReplace;
 
             vToReplace = vToSave;
-            vToSave = Down[i][pos];
-            Down[i][pos] = vToReplace;
+            vToSave = Down[pos][i];
+            Down[pos][i] = vToReplace;
 
             vToReplace = vToSave;
-            Front[i][pos] = vToReplace;
+            Front[pos][i] = vToReplace;
 
         }
 
@@ -247,7 +247,7 @@ public class Cubo{
         }
 
     }
-
+    
     private void Move_d(int pos) {
 
         int n = Back.length - 1;
@@ -255,19 +255,19 @@ public class Cubo{
 
         for (int i = 0; i < n + 1; i++) {
 
-            vToSave = Right[n - i][pos];
-            Right[n - i][pos] = Front[pos][i];
+            vToSave = Right[pos][n - i];
+            Right[pos][n - i] = Front[i][pos];
 
             vToReplace = vToSave;
-            vToSave = Back[n - pos][n - i];
-            Back[n - pos][n - i] = vToReplace;
+            vToSave = Back[n - i][n - pos];
+            Back[n - i][n - pos] = vToReplace;
 
             vToReplace = vToSave;
-            vToSave = Left[i][n - pos];
-            Left[i][n - pos] = vToReplace;
+            vToSave = Left[n- pos][i];
+            Left[n - pos][i] = vToReplace;
 
             vToReplace = vToSave;
-            Front[pos][i] = vToReplace;
+            Front[i][pos] = vToReplace;
 
         }
 
@@ -286,19 +286,19 @@ public class Cubo{
 
         for (int i = 0; i < n + 1; i++) {
 
-            vToSave = Right[pos][i];
-            Right[pos][i] = Up[pos][i];
+            vToSave = Right[i][pos];
+            Right[i][pos] = Up[i][pos];
 
             vToReplace = vToSave;
-            vToSave = Down[pos][i];
-            Down[pos][i] = vToReplace;
+            vToSave = Down[i][pos];
+            Down[i][pos] = vToReplace;
 
             vToReplace = vToSave;
-            vToSave = Left[pos][i];
-            Left[pos][i] = vToReplace;
+            vToSave = Left[i][pos];
+            Left[i][pos] = vToReplace;
 
             vToReplace = vToSave;
-            Up[pos][i] = vToReplace;
+            Up[i][pos] = vToReplace;
 
         }
 

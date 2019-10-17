@@ -11,6 +11,12 @@ public class Estado {
 		 
 	}
 	
+	public Estado(Cubo c) {
+		
+		setC(c);
+		
+	}
+	
 	public Cubo getC() {
 		return c;
 	}
