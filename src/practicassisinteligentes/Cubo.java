@@ -1,5 +1,10 @@
-import java.io.*;
-import com.google.gson.*;
+import java.io.FileReader;
+import java.io.UnsupportedEncodingException;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class Cubo{
 
@@ -325,9 +330,9 @@ public class Cubo{
                 }
             }
         }
-
-        face = rotatedFace;
-
+        
+        System.arraycopy(rotatedFace, 0, face, 0, n);
+ 
     }
 
     
