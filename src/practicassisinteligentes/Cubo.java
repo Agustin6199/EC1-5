@@ -499,7 +499,7 @@ public class Cubo{
     	return stringFace;
 	}
 	
-    public String Get_MD5() {
+    public String get_MD5() {
     	
     	String toConvert = "";
     		
