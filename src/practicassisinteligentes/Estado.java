@@ -30,7 +30,7 @@ public class Estado {
 		return getC().isSolved();
 	}
 	
-	public ArrayList<Sucesor> sucesores(Estado e){
+	public ArrayList<Sucesor> Sucesores(Estado e){
 		int n = e.c.getBack().length;
 		ArrayList<Sucesor> listaSucesores = new ArrayList<Sucesor>();
 		

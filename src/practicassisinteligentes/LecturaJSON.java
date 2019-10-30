@@ -20,32 +20,32 @@ public class LecturaJSON {
         System.out.println(cuboResuelto.toString());
        
         System.out.println("///////////////////TESTING////////////////////\n");
-        System.out.println("Primer Cubo: " + cuboJSON.Get_MD5());
+        System.out.println("Primer Cubo: " + cuboJSON.get_MD5());
         cuboJSON.Move("l3");
-        System.out.println("Aplicado movimiento l3: " + cuboJSON.Get_MD5());
+        System.out.println("Aplicado movimiento l3: " + cuboJSON.get_MD5());
         System.out.println(cuboJSON.toString());
         cuboJSON.Move("D1");
-        System.out.println("Aplicado movimiento D1: " + cuboJSON.Get_MD5());
+        System.out.println("Aplicado movimiento D1: " + cuboJSON.get_MD5());
         System.out.println(cuboJSON.toString());
         cuboJSON.Move("l1");
-        System.out.println("Aplicado movimiento l1: " + cuboJSON.Get_MD5());
+        System.out.println("Aplicado movimiento l1: " + cuboJSON.get_MD5());
         System.out.println(cuboJSON.toString());
         
         
         cuboJSON.Move("d0");
-        System.out.println("Aplicado movimiento d0: " + cuboJSON.Get_MD5()); //Este es a partir del cual dan mal
+        System.out.println("Aplicado movimiento d0: " + cuboJSON.get_MD5()); //Este es a partir del cual dan mal
         System.out.println(cuboJSON.toString());
         cuboJSON.Move("B0");
-        System.out.println("Aplicado movimiento B0: " + cuboJSON.Get_MD5());
+        System.out.println("Aplicado movimiento B0: " + cuboJSON.get_MD5());
         System.out.println(cuboJSON.toString());
         cuboJSON.Move("b5");
-        System.out.println("Aplicado movimiento b5: " + cuboJSON.Get_MD5());
+        System.out.println("Aplicado movimiento b5: " + cuboJSON.get_MD5());
         System.out.println(cuboJSON.toString());
         cuboJSON.Move("l2");
-        System.out.println("Aplicado movimiento l2: " + cuboJSON.Get_MD5());
+        System.out.println("Aplicado movimiento l2: " + cuboJSON.get_MD5());
         System.out.println(cuboJSON.toString());
         cuboJSON.Move("d1");
-        System.out.println("Aplicado movimiento d1: " + cuboJSON.Get_MD5());
+        System.out.println("Aplicado movimiento d1: " + cuboJSON.get_MD5());
         System.out.println(cuboJSON.toString());
         
         //System.out.println("El cubo del fichero JSON " + (cuboJSON.isSolved()?"si":"no") + " está resuelto.");
