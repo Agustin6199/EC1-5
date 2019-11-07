@@ -26,13 +26,19 @@ public class Cubo{
     public Cubo clone() {
     	Cubo clone = new Cubo(this.Back.length);
     	
-        System.arraycopy(this.Back, 0, clone.getBack(), 0, this.Back.length);
-        System.arraycopy(this.Down, 0, clone.getDown(), 0, this.Back.length);
-        System.arraycopy(this.Front, 0, clone.getFront(), 0, this.Back.length);
-        System.arraycopy(this.Left, 0, clone.getLeft(), 0, this.Back.length);
-        System.arraycopy(this.Right, 0, clone.getRight(), 0, this.Back.length);
-        System.arraycopy(this.Up, 0, clone.getUp(), 0, this.Back.length);
-
+    	int [][] Back = (int [][]) this.Back.clone(); 
+    	clone.setBack(Back);
+    	int [][] Down = (int [][]) this.Down.clone(); 
+    	clone.setBack(Down);
+    	int [][] Front = (int [][]) this.Front.clone(); 
+    	clone.setBack(Front);
+    	int [][] Left = (int [][]) this.Left.clone(); 
+    	clone.setBack(Left);
+    	int [][] Right = (int [][]) this.Right.clone(); 
+    	clone.setBack(Right);
+    	int [][] Up = (int [][]) this.Up.clone(); 
+    	clone.setBack(Up);
+    
     	return clone;
     }
     

@@ -1,5 +1,6 @@
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class LecturaJSON {
 
@@ -15,7 +16,22 @@ public class LecturaJSON {
         	System.out.println("Error, fichero no encontrado.");
         }
         
-        if(cuboJSON != null)
+        Estado e = new Estado(cuboResuelto);
+		ArrayList<Sucesor> lista = new ArrayList<Sucesor>();
+        lista = e.Sucesores();
+        for(int i=0; i<lista.size();i++) {
+        	System.out.println(lista.get(i).getAccion());
+        	System.out.println(lista.get(i).getEstado().getC().toString());
+        }
+        
+        /*Cubo clon = cuboJSON.clone();
+        cuboJSON.Move("l3");
+        clon.Move("d0");
+        System.out.println(cuboJSON.toString());
+        System.out.println(clon.toString());
+		*/
+        
+        /*if(cuboJSON != null)
         	System.out.println(cuboJSON.toString());
         System.out.println(cuboResuelto.toString());
        
@@ -47,6 +63,7 @@ public class LecturaJSON {
         cuboJSON.Move("d1");
         System.out.println("Aplicado movimiento d1: " + cuboJSON.get_MD5());
         System.out.println(cuboJSON.toString());
+        */
         
         //System.out.println("El cubo del fichero JSON " + (cuboJSON.isSolved()?"si":"no") + " está resuelto.");
         //System.out.println("El cubo creado mediante el constructor que tiene un entero como parámetro " + (cuboResuelto.isSolved()?"si":"no") + " está resuelto.");

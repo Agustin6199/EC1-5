@@ -2,11 +2,11 @@
 public class Sucesor {
 	private int coste = 1;
 	private String accion;
-	private Estado cubo;
+	private Estado estado;
 
-	public Sucesor(String accion, Estado cubo) {
+	public Sucesor(String accion, Estado estado) {
 		this.accion = accion;
-		this.cubo = cubo;
+		this.estado = estado;
 	}
 
 	public int getCoste() {
@@ -25,11 +25,11 @@ public class Sucesor {
 		this.accion = accion;
 	}
 
-	public Estado getCubo() {
-		return cubo;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setCubo(Estado cubo) {
-		this.cubo = cubo;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 }
