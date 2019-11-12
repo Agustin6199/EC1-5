@@ -22,8 +22,8 @@ public class Frontera {
         //riorityQueue<NodoArbol> c = new PriorityQueue<NodoArbol>();
     }
     
-    public void Eliminar(){
-        frontera.poll();
+    public NodoArbol Eliminar(){
+        return frontera.poll();
     }
     
     public boolean estaVacia(){
