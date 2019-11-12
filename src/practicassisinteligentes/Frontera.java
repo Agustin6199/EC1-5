@@ -11,7 +11,7 @@ public class Frontera {
                 if((a1.getF() - a2.getF()) == 0){
                     return (0);
                 }
-                return (a2.getF() - a1.getF());
+                return ((int)a2.getF() - (int)a1.getF());
             }
         });
         

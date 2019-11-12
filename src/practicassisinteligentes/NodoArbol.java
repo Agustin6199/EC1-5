@@ -9,9 +9,9 @@ public class NodoArbol {
 	int costeCamino;
 	String accion;				//Accion desde el padre para alcanzar el estado actual
 	int d; 						//Profundidad del nodo
-	int f; 						//Valor que determina la posicion de insercion en la frontera
+	float f; 						//Valor que determina la posicion de insercion en la frontera
 	
-	public NodoArbol(NodoArbol np, Estado estado, int cc, String ac, int d, int f) {
+	public NodoArbol(NodoArbol np, Estado estado, int cc, String ac, int d, float f) {
 		this.nodoPadre = np;
 		this.estado = estado;
 		this.costeCamino = cc;
@@ -60,11 +60,11 @@ public class NodoArbol {
 		this.d = d;
 	}
 
-	public int getF() {
+	public float getF() {
 		return f;
 	}
 
-	public void setF(int f) {
+	public void setF(float f) {
 		this.f = f;
 	}
 	
