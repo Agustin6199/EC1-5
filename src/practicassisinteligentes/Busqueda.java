@@ -30,16 +30,14 @@ public class Busqueda {
 		NodoArbol n_inicial = new NodoArbol(null, prob.getEstadoInicial(), 0, "Init", 0, 0);
 		frontera.Insertar(n_inicial);
 		boolean sol = false;
-
 		while(!sol && !frontera.estaVacia()) {
 			n_actual = frontera.Eliminar(); //Seleccionamos nodo de la frontera.
-			
 			if(prob.isSolved(n_actual.getEstado())) {
 				sol = true;
 			}else {
 				ArrayList<Sucesor> ls = n_actual.getEstado().Sucesores();
 				ArrayList<NodoArbol> ln = CrearListaNodosArbol(ls, n_actual, prof_max, est);
-				//frontera.InsertarLista(ln);
+				frontera.InsertarLista(ln);
 			}
 			
 		}
