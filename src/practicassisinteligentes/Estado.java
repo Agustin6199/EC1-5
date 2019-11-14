@@ -52,7 +52,7 @@ public class Estado {
 			Cubo c3 = this.c.clone();
 			c3.Move("D"+i);
 			Estado e3 = new Estado(c3);
-			Sucesor sucesor3 = new Sucesor("D"+i,e3);
+			Sucesor sucesor3 = new Sucesor("D"+i,e3	);
 			listaSucesores.add(sucesor3);
 			
 			Cubo c4 = this.c.clone();

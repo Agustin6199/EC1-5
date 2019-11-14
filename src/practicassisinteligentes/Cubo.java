@@ -24,8 +24,33 @@ public class Cubo{
     }
 
     public Cubo clone() {
-    	Cubo clone = new Cubo(this.Back.length);
-    	
+    	int n = this.Back.length;
+    	Cubo clone = new Cubo(n);
+    	int[][] back = new int[n][n];
+        int[][] down = new int[n][n];
+        int[][] front = new int[n][n];
+        int[][] left = new int[n][n];
+        int[][] right = new int[n][n];
+        int[][] up = new int[n][n];
+        
+        for(int i=0; i<this.Back.length; i++) {
+            for(int j=0; j<this.Back.length; j++) {
+            	back[i][j] = this.Back[i][j];
+            	down[i][j] = this.Down[i][j];
+            	front[i][j] = this.Front[i][j];
+            	left[i][j] = this.Left[i][j];
+            	right[i][j] = this.Right[i][j];
+            	up[i][j] = this.Up[i][j];
+            }
+        }
+        clone.setBack(back);
+        clone.setDown(down);
+        clone.setFront(front);
+        clone.setLeft(left);
+        clone.setRight(right);
+        clone.setUp(up);
+        
+    	/*
     	int [][] Back = (int [][]) this.Back.clone(); 
     	clone.setBack(Back);
     	int [][] Down = (int [][]) this.Down.clone(); 
@@ -38,7 +63,7 @@ public class Cubo{
     	clone.setBack(Right);
     	int [][] Up = (int [][]) this.Up.clone(); 
     	clone.setBack(Up);
-    
+    	 */
     	return clone;
     }
     

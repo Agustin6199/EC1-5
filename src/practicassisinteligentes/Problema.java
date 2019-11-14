@@ -8,6 +8,10 @@ public class Problema {
 		setEstadoInicial(new Estado(json));
 	}
 	
+	public Problema(Estado e) {
+		setEstadoInicial(e);
+	}
+	
 	public Estado getEstadoInicial() {
 		return estadoInicial;
 	}

@@ -12,14 +12,17 @@ public class Busqueda {
 		Problema Prob = null;
 		
 		try {
-        	FileReader f = new FileReader("10x10cube.json");
-    		Prob = new Problema(f);
+			Cubo c = new Cubo(3);
+			c.Move("L0");
+			Estado e = new Estado(c);
+			Prob = new Problema(e);
+        	FileReader f = new FileReader("cube.json");
+    		//Prob = new Problema(f);
         }catch(FileNotFoundException e){
         	System.out.println("Error, fichero no encontrado.");
         }
 		
-		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Anchura, 20);
-	
+		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Anchura, 4);
 	}
 	
 	
@@ -32,8 +35,11 @@ public class Busqueda {
 		boolean sol = false;
 		while(!sol && !frontera.estaVacia()) {
 			n_actual = frontera.Eliminar(); //Seleccionamos nodo de la frontera.
+			System.out.println(n_actual.getD() +"   " +n_actual.getNodoPadre() + "   " + n_actual.getAccion());
+			System.out.println(n_actual.getEstado().getC().toString());
 			if(prob.isSolved(n_actual.getEstado())) {
 				sol = true;
+				System.out.print("Hay solucion");
 			}else {
 				ArrayList<Sucesor> ls = n_actual.getEstado().Sucesores();
 				ArrayList<NodoArbol> ln = CrearListaNodosArbol(ls, n_actual, prof_max, est);
