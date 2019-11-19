@@ -3,6 +3,7 @@ public class NodoArbol {
 	
 	//Información del nodo
 	NodoArbol nodoPadre;
+	static int id; 
 	
 	//Información del dominio
 	Estado estado;
@@ -11,6 +12,7 @@ public class NodoArbol {
 	int d; 						//Profundidad del nodo
 	float f; 						//Valor que determina la posicion de insercion en la frontera
 	
+
 	public NodoArbol(NodoArbol np, Estado estado, int cc, String ac, int d, float f) {
 		this.nodoPadre = np;
 		this.estado = estado;
@@ -18,7 +20,12 @@ public class NodoArbol {
 		this.accion = ac;
 		this.d = d;
 		this.f = f;
+		id++;
 	}
+        
+        public static void reiniciarID(){
+            id = 0;
+        }
 
 	public NodoArbol getNodoPadre() {
 		return nodoPadre;
@@ -28,6 +35,14 @@ public class NodoArbol {
 		this.nodoPadre = nodoPadre;
 	}
 
+	public int getID() {
+		return id;
+	}
+
+	public void setID(int id) {
+		this.id = id;
+	}
+	
 	public Estado getEstado() {
 		return estado;
 	}

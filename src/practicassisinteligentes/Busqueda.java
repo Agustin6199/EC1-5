@@ -11,6 +11,7 @@ public class Busqueda {
 		
 		Problema Prob = null;
 		
+		
 		try {
 			Cubo c = new Cubo(3);
 			c.Move("L0");
@@ -29,6 +30,7 @@ public class Busqueda {
 	private static boolean Busqueda_Acotada(Problema prob, Estrategia est, int prof_max) {
 		
 		NodoArbol n_actual = null;
+                NodoArbol.reiniciarID();
 		Frontera frontera = new Frontera();
 		NodoArbol n_inicial = new NodoArbol(null, prob.getEstadoInicial(), 0, "Init", 0, 0);
 		frontera.Insertar(n_inicial);

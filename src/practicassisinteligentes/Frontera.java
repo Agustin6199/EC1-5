@@ -7,14 +7,18 @@ public class Frontera {
 
     public Frontera() {
         this.frontera = new PriorityQueue<NodoArbol>(new Comparator<NodoArbol>(){
-            public int compare(NodoArbol a1, NodoArbol a2) {
+            public int compare(NodoArbol a1, NodoArbol a2) { //Ordena de menor a mayor según el valor que tenga de F
             	if (a1.getF() < a2.getF()) {
                     return -1;  
             	}else if (a1.getF() > a2.getF()) {
                     return 1; 
-            	}
-            	return 0; 
-                } 
+            	}else { //En caso de que tengan la misma f se guiará por el menor de los ID ya que este no podrá estar repetido
+            		if(a1.getID() < a2.getID()) {
+            			return -1;
+            		}else  {
+            			return 1;
+            		}
+            	}} 
         });
         
     }
