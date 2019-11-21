@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class Busqueda {
@@ -30,11 +31,16 @@ public class Busqueda {
 	private static boolean Busqueda_Acotada(Problema prob, Estrategia est, int prof_max) {
 		
 		NodoArbol n_actual = null;
-                NodoArbol.reiniciarID();
 		Frontera frontera = new Frontera();
+		boolean sol = false;
+
+		HashMap<String,String> nodosFrontera = new HashMap<String, String>();
+                NodoArbol.reiniciarID();
+
 		NodoArbol n_inicial = new NodoArbol(null, prob.getEstadoInicial(), 0, "Init", 0, 0);
 		frontera.Insertar(n_inicial);
-		boolean sol = false;
+
+
 		while(!sol && !frontera.estaVacia()) {
 			n_actual = frontera.Eliminar(); //Seleccionamos nodo de la frontera.
 			System.out.println(n_actual.getD() +"   " +n_actual.getNodoPadre() + "   " + n_actual.getAccion());
@@ -44,7 +50,7 @@ public class Busqueda {
 				System.out.print("Hay solucion");
 			}else {
 				ArrayList<Sucesor> ls = n_actual.getEstado().Sucesores();
-				ArrayList<NodoArbol> ln = CrearListaNodosArbol(ls, n_actual, prof_max, est);
+				ArrayList<NodoArbol> ln = CrearListaNodosArbol(ls, n_actual, prof_max, est, nodosFrontera);
 				frontera.InsertarLista(ln);
 			}
 			
@@ -52,8 +58,8 @@ public class Busqueda {
 		
 		return sol;
 	}
-	
-	private static ArrayList<NodoArbol> CrearListaNodosArbol(ArrayList<Sucesor> ls, NodoArbol n_actual, int prof_max, Estrategia est) {
+
+	private static ArrayList<NodoArbol> CrearListaNodosArbol(ArrayList<Sucesor> ls, NodoArbol n_actual, int prof_max, Estrategia est, HashMap<String,String> nodosFrontera) {
 		
 		ArrayList<NodoArbol> lna = new ArrayList<NodoArbol>();
 		
@@ -67,7 +73,21 @@ public class Busqueda {
 			float f = ObtainF(est, coste, profundidad);
 			
 			NodoArbol n = new NodoArbol(n_actual, s.getEstado(), coste, s.getAccion(), profundidad, f);
-			lna.add(n);
+			
+			if(nodosFrontera.containsKey(s.getEstado().getC().get_MD5())){
+				if(f < Float.valueOf(nodosFrontera.get(s.getEstado().getC().get_MD5()))){
+					
+					nodosFrontera.put(s.getEstado().getC().get_MD5(), Float.toString(f));
+					lna.add(n);
+					
+				}
+			}else{
+				
+				nodosFrontera.put(s.getEstado().getC().get_MD5(), Float.toString(f));
+				lna.add(n);
+				
+			}
+
 		}
 		
 		return lna;
