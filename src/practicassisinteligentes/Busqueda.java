@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 public class Busqueda {
 
-	public enum Estrategia{Anchura, Profundidad_Simple, Profundidad_Iterativa, Profundidad_Acotada, Coste_Uniforme}
+	public enum Estrategia{Anchura, Profundidad_Simple, Profundidad_Iterativa, Profundidad_Acotada, Coste_Uniforme, Voraz, Aasterisco}
 	
 	public static void main(String[] args){
 		
@@ -43,15 +43,19 @@ public class Busqueda {
 
 		while(!sol && !frontera.estaVacia()) {
 			n_actual = frontera.Eliminar(); //Seleccionamos nodo de la frontera.
-			System.out.println(n_actual.getD() +"   " +n_actual.getNodoPadre() + "   " + n_actual.getAccion());
-			System.out.println(n_actual.getEstado().getC().toString());
-			if(prob.isSolved(n_actual.getEstado())) {
-				sol = true;
-				System.out.print("Hay solucion");
-			}else {
-				ArrayList<Sucesor> ls = n_actual.getEstado().Sucesores();
-				ArrayList<NodoArbol> ln = CrearListaNodosArbol(ls, n_actual, prof_max, est, nodosFrontera);
-				frontera.InsertarLista(ln);
+			
+			if((est != Estrategia.Profundidad_Acotada && est != Estrategia.Profundidad_Iterativa) || n_actual.getD() <= prof_max) {
+				System.out.println(n_actual.getD() +"   " +n_actual.getNodoPadre() + "   " + n_actual.getAccion());
+				System.out.println(n_actual.getEstado().getC().toString());
+				if(prob.isSolved(n_actual.getEstado())) {
+					sol = true;
+					System.out.print("Hay solucion");
+				}else {
+					ArrayList<Sucesor> ls = n_actual.getEstado().Sucesores();
+					ArrayList<NodoArbol> ln = CrearListaNodosArbol(ls, n_actual, prof_max, est, nodosFrontera);
+					frontera.InsertarLista(ln);
+				}
+				
 			}
 			
 		}
@@ -59,6 +63,18 @@ public class Busqueda {
 		return sol;
 	}
 
+	public static boolean Busqueda_Iterativa(Problema prob, Estrategia est, int prof_max, int incremento) {
+		int prof_actual = incremento;
+		boolean sol = false;
+		
+		while(!sol && (prof_actual <= prof_max)) {
+			sol = Busqueda_Acotada(prob, est, prof_max);
+			prof_actual+=incremento;
+		}
+		
+		return sol;
+	}
+	
 	private static ArrayList<NodoArbol> CrearListaNodosArbol(ArrayList<Sucesor> ls, NodoArbol n_actual, int prof_max, Estrategia est, HashMap<String,String> nodosFrontera) {
 		
 		ArrayList<NodoArbol> lna = new ArrayList<NodoArbol>();
@@ -112,6 +128,10 @@ public class Busqueda {
 			break;
 		case Coste_Uniforme:
 			f = coste;
+			break;
+		case Voraz:
+			break;
+		case Aasterisco:
 			break;
 		}
 		
