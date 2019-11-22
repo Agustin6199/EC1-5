@@ -25,7 +25,6 @@ public class Frontera {
     
     public void Insertar(NodoArbol n){
         frontera.add(n);
-        //riorityQueue<NodoArbol> c = new PriorityQueue<NodoArbol>();
     }
     
     public void InsertarLista(ArrayList<NodoArbol> listaNodos) {

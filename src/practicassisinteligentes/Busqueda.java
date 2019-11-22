@@ -20,7 +20,8 @@ public class Busqueda {
         	System.out.println("Error, fichero no encontrado.");
         }
 		
-		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Anchura, 6);
+		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Profundidad_Acotada, 600);
+		
 	}
 	
 	
@@ -31,7 +32,7 @@ public class Busqueda {
 		boolean sol = false;
 
 		HashMap<String,String> nodosFrontera = new HashMap<String, String>();
-                NodoArbol.reiniciarID();
+        NodoArbol.reiniciarID();
 
 		NodoArbol n_inicial = new NodoArbol(null, prob.getEstadoInicial(), 0, "Init", 0, 0);
 		frontera.Insertar(n_inicial);
@@ -41,11 +42,18 @@ public class Busqueda {
 			n_actual = frontera.Eliminar(); //Seleccionamos nodo de la frontera.
 			
 			if((est != Estrategia.Profundidad_Acotada && est != Estrategia.Profundidad_Iterativa) || n_actual.getD() <= prof_max) {
-				System.out.println(n_actual.getD() +"   " +n_actual.getNodoPadre() + "   " + n_actual.getAccion()+ "  " +n_actual.getIdNodo());
+				System.out.println("id: "+n_actual.getIdNodo()+" md5 actual: "+n_actual+" md5 padre: "+n_actual.getNodoPadre()+ " movimiento: "+ n_actual.getAccion()+" profundidad: "+n_actual.getD()+ " f: "+n_actual.getF());
 				System.out.println(n_actual.getEstado().getC().toString());
 				if(prob.isSolved(n_actual.getEstado())) {
 					sol = true;
-					System.out.print("Hay solucion");
+					System.out.println("Hay solucion");
+					System.out.println(n_actual.getEstado().getC().get_MD5()+ " " +n_actual.getIdNodo());
+					System.out.println(n_actual.getNodoPadre().getEstado().getC().get_MD5()+ " " +n_actual.getNodoPadre().getIdNodo());
+					System.out.println(n_actual.getNodoPadre().getNodoPadre().getEstado().getC().get_MD5()+ " " +n_actual.getNodoPadre().getNodoPadre().getIdNodo());
+					System.out.println(n_actual.getNodoPadre().getNodoPadre().getNodoPadre().getEstado().getC().get_MD5()+ " " +n_actual.getNodoPadre().getNodoPadre().getNodoPadre().getIdNodo());
+					System.out.println(n_actual.getNodoPadre().getNodoPadre().getNodoPadre().getNodoPadre().getEstado().getC().get_MD5()+ " " +n_actual.getNodoPadre().getNodoPadre().getNodoPadre().getNodoPadre().getIdNodo());
+
+
 				}else {
 					ArrayList<Sucesor> ls = n_actual.getEstado().Sucesores();
 					ArrayList<NodoArbol> ln = CrearListaNodosArbol(ls, n_actual, prof_max, est, nodosFrontera);

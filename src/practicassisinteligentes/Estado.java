@@ -51,6 +51,23 @@ public class Estado {
 			listaSucesores.add(sucesor6);
 		}
 		
+		for(int i = 0; i < n; i++) {	
+			//generar estado con movimiento D"n"
+			Cubo c3 = this.c.clone();
+			c3.Move("D"+i);
+			Estado e3 = new Estado(c3);
+			Sucesor sucesor3 = new Sucesor("D"+i,e3	);
+			listaSucesores.add(sucesor3);
+		}
+		
+		for(int i = 0; i < n; i++) {	
+			Cubo c4 = this.c.clone();
+			c4.Move("d"+i);
+			Estado e4 = new Estado(c4);
+			Sucesor sucesor4 = new Sucesor("d"+i,e4);
+			listaSucesores.add(sucesor4);
+		}
+		
 		for(int i = 0; i < n; i++) {
 			//generar estado con movimiento L"n"
 			Cubo c1 = this.c.clone();
@@ -68,22 +85,7 @@ public class Estado {
 			listaSucesores.add(sucesor2);
 		}
 
-		for(int i = 0; i < n; i++) {	
-			//generar estado con movimiento D"n"
-			Cubo c3 = this.c.clone();
-			c3.Move("D"+i);
-			Estado e3 = new Estado(c3);
-			Sucesor sucesor3 = new Sucesor("D"+i,e3	);
-			listaSucesores.add(sucesor3);
-		}
 		
-		for(int i = 0; i < n; i++) {	
-			Cubo c4 = this.c.clone();
-			c4.Move("d"+i);
-			Estado e4 = new Estado(c4);
-			Sucesor sucesor4 = new Sucesor("d"+i,e4);
-			listaSucesores.add(sucesor4);
-		}
 		
 		return listaSucesores;
 	}
