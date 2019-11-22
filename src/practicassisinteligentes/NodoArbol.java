@@ -1,12 +1,12 @@
-
 public class NodoArbol {
 	
-	//InformaciÃ³n del nodo
+	//Información del nodo
 	NodoArbol nodoPadre;
 	static int id; 
 	
-	//InformaciÃ³n del dominio
+	//Información del dominio
 	Estado estado;
+	int idNodo;
 	int costeCamino;
 	String accion;				//Accion desde el padre para alcanzar el estado actual
 	int d; 						//Profundidad del nodo
@@ -20,8 +20,24 @@ public class NodoArbol {
 		this.accion = ac;
 		this.d = d;
 		this.f = f;
-		id++;
+		this.idNodo = id++;
 	}
+
+    public static int getId() {
+        return id;
+    }
+
+    public static void setId(int id) {
+        NodoArbol.id = id;
+    }
+
+    public int getIdNodo() {
+        return idNodo;
+    }
+
+    public void setIdNodo(int idNodo) {
+        this.idNodo = idNodo;
+    }
         
         public static void reiniciarID(){
             id = 0;

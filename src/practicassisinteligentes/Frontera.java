@@ -13,7 +13,7 @@ public class Frontera {
             	}else if (a1.getF() > a2.getF()) {
                     return 1; 
             	}else { //En caso de que tengan la misma f se guiará por el menor de los ID ya que este no podrá estar repetido
-            		if(a1.getID() < a2.getID()) {
+            		if(a1.getIdNodo() < a2.getIdNodo()) {
             			return -1;
             		}else  {
             			return 1;

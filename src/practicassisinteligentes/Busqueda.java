@@ -14,17 +14,13 @@ public class Busqueda {
 		
 		
 		try {
-			Cubo c = new Cubo(3);
-			c.Move("L0");
-			Estado e = new Estado(c);
-			Prob = new Problema(e);
-        	FileReader f = new FileReader("cube.json");
-    		//Prob = new Problema(f);
+        	FileReader f = new FileReader("2x2.json");
+    		Prob = new Problema(f);
         }catch(FileNotFoundException e){
         	System.out.println("Error, fichero no encontrado.");
         }
 		
-		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Anchura, 4);
+		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Anchura, 6);
 	}
 	
 	
@@ -45,7 +41,7 @@ public class Busqueda {
 			n_actual = frontera.Eliminar(); //Seleccionamos nodo de la frontera.
 			
 			if((est != Estrategia.Profundidad_Acotada && est != Estrategia.Profundidad_Iterativa) || n_actual.getD() <= prof_max) {
-				System.out.println(n_actual.getD() +"   " +n_actual.getNodoPadre() + "   " + n_actual.getAccion());
+				System.out.println(n_actual.getD() +"   " +n_actual.getNodoPadre() + "   " + n_actual.getAccion()+ "  " +n_actual.getIdNodo());
 				System.out.println(n_actual.getEstado().getC().toString());
 				if(prob.isSolved(n_actual.getEstado())) {
 					sol = true;
