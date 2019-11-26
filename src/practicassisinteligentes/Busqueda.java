@@ -20,7 +20,7 @@ public class Busqueda {
         	System.out.println("Error, fichero no encontrado.");
         }
 		
-		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Profundidad_Acotada, 600);
+		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Profundidad_Iterativa, 6);
 		
 	}
 	
@@ -55,15 +55,17 @@ public class Busqueda {
 
 
 				}else {
+					if(n_actual.getD() < prof_max) {
 					ArrayList<Sucesor> ls = n_actual.getEstado().Sucesores();
 					ArrayList<NodoArbol> ln = CrearListaNodosArbol(ls, n_actual, prof_max, est, nodosFrontera);
 					frontera.InsertarLista(ln);
+					}
 				}
 				
 			}
 			
 		}
-		
+		System.out.println("La frontera esta vacia");
 		return sol;
 	}
 
@@ -122,13 +124,13 @@ public class Busqueda {
 			f = profundidad;
 			break;
 		case Profundidad_Simple:
-			f = 1/(1 + profundidad);
+			f = 1f/(1f + profundidad);
 			break;
 		case Profundidad_Acotada:
-			f = 1/(1 + profundidad);
+			f = 1f/(1f + profundidad);
 			break;
 		case Profundidad_Iterativa:
-			f = 1/(1 + profundidad);
+			f = 1f/(1f + profundidad);
 			break;
 		case Coste_Uniforme:
 			f = coste;
