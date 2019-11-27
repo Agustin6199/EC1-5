@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Stack;
 
 public class Busqueda {
 
@@ -20,8 +21,8 @@ public class Busqueda {
         	System.out.println("Error, fichero no encontrado.");
         }
 		
-		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Anchura, 6);
-		System.out.print(resultado);
+		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Voraz, 6);
+
 	}
 	
 	
@@ -34,25 +35,18 @@ public class Busqueda {
 		HashMap<String,String> nodosFrontera = new HashMap<String, String>();
         NodoArbol.reiniciarID();
 
-		NodoArbol n_inicial = new NodoArbol(null, prob.getEstadoInicial(), 0, "Init", 0, 0);
+		NodoArbol n_inicial = new NodoArbol(null, prob.getEstadoInicial(), 0, "None", 0, 0);
 		frontera.Insertar(n_inicial);
 
 		while(!sol && !frontera.estaVacia()) {
 			n_actual = frontera.Eliminar(); //Seleccionamos nodo de la frontera.
 
 			if((est != Estrategia.Profundidad_Acotada && est != Estrategia.Profundidad_Iterativa) || n_actual.getD() <= prof_max) {
-				System.out.println("id: "+n_actual.getIdNodo()+" md5 actual: "+n_actual+" md5 padre: "+n_actual.getNodoPadre()+ " movimiento: "+ n_actual.getAccion()+" profundidad: "+n_actual.getD()+ " f: "+n_actual.getF());
-				System.out.println(n_actual.getEstado().getC().toString());
-				//System.out.println("id: " +n_actual.getIdNodo()+ " profundidad: "+n_actual.getD());
+				//System.out.println("id: "+n_actual.getIdNodo()+" md5 actual: "+n_actual+" md5 padre: "+n_actual.getNodoPadre()+ " movimiento: "+ n_actual.getAccion()+" profundidad: "+n_actual.getD()+ " f: "+n_actual.getF());
+				//System.out.println(n_actual.getEstado().getC().toString());
+
 				if(prob.isSolved(n_actual.getEstado())) {
 					sol = true;
-					System.out.println("Hay solucion");
-					System.out.println(n_actual.getEstado().getC().get_MD5()+ " " +n_actual.getIdNodo());
-					System.out.println(n_actual.getNodoPadre().getEstado().getC().get_MD5()+ " " +n_actual.getNodoPadre().getIdNodo());
-					System.out.println(n_actual.getNodoPadre().getNodoPadre().getEstado().getC().get_MD5()+ " " +n_actual.getNodoPadre().getNodoPadre().getIdNodo());
-					System.out.println(n_actual.getNodoPadre().getNodoPadre().getNodoPadre().getEstado().getC().get_MD5()+ " " +n_actual.getNodoPadre().getNodoPadre().getNodoPadre().getIdNodo());
-					System.out.println(n_actual.getNodoPadre().getNodoPadre().getNodoPadre().getNodoPadre().getEstado().getC().get_MD5()+ " " +n_actual.getNodoPadre().getNodoPadre().getNodoPadre().getNodoPadre().getIdNodo());
-
 
 				}else {
 					if(n_actual.getD() < prof_max) {
@@ -62,9 +56,31 @@ public class Busqueda {
 					}
 				}
 				
-			}			
+			}	
+			
 		}
-		System.out.println("La frontera esta vacia");
+		
+		if(sol) {
+			Stack<NodoArbol> pilaCamino = new Stack<NodoArbol>();
+			
+			do{
+				pilaCamino.push(n_actual);
+				n_actual = n_actual.getNodoPadre();
+			}while(n_actual != null);
+			
+			System.out.println(StringEstrategia(est));
+			System.out.println("=================");
+			while(!pilaCamino.isEmpty()) {
+				NodoArbol n = pilaCamino.pop();
+				System.out.println("["+n.getIdNodo()+"](["+n.getAccion()+"]"+n.getEstado().getC().get_MD5()+",c="+n.getCosteCamino()+",p="+n.getD()+",f="+n.getF()+")");
+			}
+			System.out.println("");
+			System.out.println("");
+
+		}else {
+			System.out.println("No existe solución.");
+		}
+		
 		return sol;
 	}
 
@@ -91,7 +107,7 @@ public class Busqueda {
 			
 			int coste = n_actual.getCosteCamino() + s.getCoste();
 			int profundidad = n_actual.getD() + 1;
-			float f = ObtainF(est, coste, profundidad);
+			float f = ObtainF(est, coste, profundidad, s.getEstado().getC());
 			
 			NodoArbol n = new NodoArbol(n_actual, s.getEstado(), coste, s.getAccion(), profundidad, f);
 			if(est == Estrategia.Profundidad_Simple || est == Estrategia.Profundidad_Acotada || est == Estrategia.Profundidad_Iterativa) {
@@ -129,7 +145,7 @@ public class Busqueda {
 		
 	}
 	
-	private static float ObtainF(Estrategia e, int coste, int profundidad) {
+	private static float ObtainF(Estrategia e, int coste, int profundidad, Cubo cubo) {
 		float f = 1;
 		
 		switch(e) {
@@ -149,13 +165,82 @@ public class Busqueda {
 			f = coste;
 			break;
 		case Voraz:
+			f = Heuristica(cubo);
 			break;
 		case Aasterisco:
+			f = coste + Heuristica(cubo);
 			break;
 		}
 		
 		return f;
 	}
 	
+	public static float Heuristica(Cubo c){
+
+		float h = 0;
+		
+		h += CalcularEntropia(c.getBack());
+		h += CalcularEntropia(c.getFront());
+		h += CalcularEntropia(c.getRight());
+		h += CalcularEntropia(c.getLeft());
+		h += CalcularEntropia(c.getUp());
+		h += CalcularEntropia(c.getDown());
+
+		return h;
+
+	}
+
+	private static float CalcularEntropia(int[][] face){
+
+		float entropia = 0;
+		int N = face.length;
+		int[] contador = new int[6];
+
+		for(int i = 0; i < N; i++)
+			for(int j = 0; j < N; j++)
+				contador[face[i][j]] += 1;
+				
+		for(int c = 0; c < 6; c++)
+			if(contador[c] > 0)
+				entropia += ((float)contador[c])/(N*N) * (float)log(((float)contador[c])/(N*N), 6);
+					
+		return -entropia;
+		
+	}
+	
+	private static double log(float num, int base) {
+		return (Math.log10(num) / Math.log10(base));
+	}
+	
+	private static String StringEstrategia(Estrategia e) {
+		
+		String r = "";
+		
+		switch(e) {
+		case Anchura:
+			r = "Breadth (Anchura)";
+			break;
+		case Profundidad_Simple:
+			r = "Depth (Profundidad Simple)";
+			break;
+		case Profundidad_Acotada:
+			r = "Depth (Profundidad Acotada)";
+			break;
+		case Profundidad_Iterativa:
+			r = "Depth (Profundidad Iterativa Acotada)";
+			break;
+		case Coste_Uniforme:
+			r = "Uniforme (Costo Uniforme)";
+			break;
+		case Voraz:
+			r = "Greedy (Voraz)";
+			break;
+		case Aasterisco:
+			r = "A";
+			break;
+		}
+		
+		return r;
+	}
 }
 
