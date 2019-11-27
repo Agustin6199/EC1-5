@@ -20,8 +20,8 @@ public class Busqueda {
         	System.out.println("Error, fichero no encontrado.");
         }
 		
-		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Profundidad_Iterativa, 6);
-		
+		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Anchura, 6);
+		System.out.print(resultado);
 	}
 	
 	
@@ -37,13 +37,13 @@ public class Busqueda {
 		NodoArbol n_inicial = new NodoArbol(null, prob.getEstadoInicial(), 0, "Init", 0, 0);
 		frontera.Insertar(n_inicial);
 
-
 		while(!sol && !frontera.estaVacia()) {
 			n_actual = frontera.Eliminar(); //Seleccionamos nodo de la frontera.
-			
+
 			if((est != Estrategia.Profundidad_Acotada && est != Estrategia.Profundidad_Iterativa) || n_actual.getD() <= prof_max) {
 				System.out.println("id: "+n_actual.getIdNodo()+" md5 actual: "+n_actual+" md5 padre: "+n_actual.getNodoPadre()+ " movimiento: "+ n_actual.getAccion()+" profundidad: "+n_actual.getD()+ " f: "+n_actual.getF());
 				System.out.println(n_actual.getEstado().getC().toString());
+				//System.out.println("id: " +n_actual.getIdNodo()+ " profundidad: "+n_actual.getD());
 				if(prob.isSolved(n_actual.getEstado())) {
 					sol = true;
 					System.out.println("Hay solucion");
@@ -62,8 +62,7 @@ public class Busqueda {
 					}
 				}
 				
-			}
-			
+			}			
 		}
 		System.out.println("La frontera esta vacia");
 		return sol;
@@ -95,21 +94,35 @@ public class Busqueda {
 			float f = ObtainF(est, coste, profundidad);
 			
 			NodoArbol n = new NodoArbol(n_actual, s.getEstado(), coste, s.getAccion(), profundidad, f);
-			
-			if(nodosFrontera.containsKey(s.getEstado().getC().get_MD5())){
-				if(f < Float.valueOf(nodosFrontera.get(s.getEstado().getC().get_MD5()))){
+			if(est == Estrategia.Profundidad_Simple || est == Estrategia.Profundidad_Acotada || est == Estrategia.Profundidad_Iterativa) {
+				if(nodosFrontera.containsKey(s.getEstado().getC().get_MD5())){
+					if(f > Float.valueOf(nodosFrontera.get(s.getEstado().getC().get_MD5()))){
+						
+						nodosFrontera.put(s.getEstado().getC().get_MD5(), Float.toString(f));
+						lna.add(n);
+						
+					}
+				}else{
 					
 					nodosFrontera.put(s.getEstado().getC().get_MD5(), Float.toString(f));
-					lna.add(n);
-					
+					lna.add(n);	
 				}
-			}else{
-				
-				nodosFrontera.put(s.getEstado().getC().get_MD5(), Float.toString(f));
-				lna.add(n);
-				
-			}
-
+			}else {
+				if(nodosFrontera.containsKey(s.getEstado().getC().get_MD5())){
+					if(f < Float.valueOf(nodosFrontera.get(s.getEstado().getC().get_MD5()))){
+						
+						nodosFrontera.put(s.getEstado().getC().get_MD5(), Float.toString(f));
+						lna.add(n);
+						
+					}
+				}else{
+					
+					nodosFrontera.put(s.getEstado().getC().get_MD5(), Float.toString(f));
+					lna.add(n);	
+				}	
+				}
+			
+			
 		}
 		
 		return lna;
