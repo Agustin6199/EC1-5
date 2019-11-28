@@ -21,7 +21,11 @@ public class Busqueda {
         	System.out.println("Error, fichero no encontrado.");
         }
 		
-		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Voraz, 6);
+		long ini = System.currentTimeMillis();
+		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Anchura, 6);
+		float t = ((System.currentTimeMillis() - ini) / 1000f);
+		
+		if(resultado) System.out.println("La solución se ha encontrado en " + t + " segundos.");
 
 	}
 	
