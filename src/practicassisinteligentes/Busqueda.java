@@ -15,17 +15,18 @@ public class Busqueda {
 		
 		
 		try {
-        	FileReader f = new FileReader("2x2.json");
+        	FileReader f = new FileReader("cube.json");
     		Prob = new Problema(f);
         }catch(FileNotFoundException e){
         	System.out.println("Error, fichero no encontrado.");
         }
 		
 		long ini = System.currentTimeMillis();
-		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Anchura, 6);
+		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Voraz, 9);
 		float t = ((System.currentTimeMillis() - ini) / 1000f);
 		
 		if(resultado) System.out.println("La solución se ha encontrado en " + t + " segundos.");
+		else System.out.println("No existe solución.");
 
 	}
 	
