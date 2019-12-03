@@ -22,7 +22,7 @@ public class Busqueda {
         }
 		
 		long ini = System.currentTimeMillis();
-		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Voraz, 9);
+		boolean resultado = Busqueda_Acotada(Prob, Estrategia.Voraz, 6);
 		float t = ((System.currentTimeMillis() - ini) / 1000f);
 		
 		if(resultado) System.out.println("La solución se ha encontrado en " + t + " segundos.");
@@ -46,7 +46,7 @@ public class Busqueda {
 		while(!sol && !frontera.estaVacia()) {
 			n_actual = frontera.Eliminar(); //Seleccionamos nodo de la frontera.
 
-			if((est != Estrategia.Profundidad_Acotada && est != Estrategia.Profundidad_Iterativa) || n_actual.getD() <= prof_max) {
+			if(n_actual.getD() <= prof_max) {
 				//System.out.println("id: "+n_actual.getIdNodo()+" md5 actual: "+n_actual+" md5 padre: "+n_actual.getNodoPadre()+ " movimiento: "+ n_actual.getAccion()+" profundidad: "+n_actual.getD()+ " f: "+n_actual.getF());
 				//System.out.println(n_actual.getEstado().getC().toString());
 
