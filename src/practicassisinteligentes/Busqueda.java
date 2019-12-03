@@ -45,24 +45,18 @@ public class Busqueda {
 
 		while(!sol && !frontera.estaVacia()) {
 			n_actual = frontera.Eliminar(); //Seleccionamos nodo de la frontera.
-
-			if(n_actual.getD() <= prof_max) {
 				//System.out.println("id: "+n_actual.getIdNodo()+" md5 actual: "+n_actual+" md5 padre: "+n_actual.getNodoPadre()+ " movimiento: "+ n_actual.getAccion()+" profundidad: "+n_actual.getD()+ " f: "+n_actual.getF());
 				//System.out.println(n_actual.getEstado().getC().toString());
 
-				if(prob.isSolved(n_actual.getEstado())) {
-					sol = true;
-
-				}else {
-					if(n_actual.getD() < prof_max) {
-					ArrayList<Sucesor> ls = n_actual.getEstado().Sucesores();
-					ArrayList<NodoArbol> ln = CrearListaNodosArbol(ls, n_actual, prof_max, est, nodosFrontera);
-					frontera.InsertarLista(ln);
+			if(prob.isSolved(n_actual.getEstado())) {
+				sol = true;	
+			}else {
+				if(n_actual.getD() < prof_max) {
+				ArrayList<Sucesor> ls = n_actual.getEstado().Sucesores();
+				ArrayList<NodoArbol> ln = CrearListaNodosArbol(ls, n_actual, prof_max, est, nodosFrontera);
+				frontera.InsertarLista(ln);
 					}
-				}
-				
-			}	
-			
+				}	
 		}
 		
 		if(sol) {
