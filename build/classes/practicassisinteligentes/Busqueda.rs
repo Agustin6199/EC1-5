@@ -1,0 +1,2 @@
+Busqueda$Estrategia
+Busqueda
